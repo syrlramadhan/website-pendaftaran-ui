@@ -9,7 +9,7 @@ export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Fungsi untuk toggle dark mode
-  const toggleDarkMode = () => {
+  const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
 
@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children }) => {
   }, [isDarkMode]);
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+    <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

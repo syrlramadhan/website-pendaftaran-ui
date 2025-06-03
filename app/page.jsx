@@ -18,49 +18,45 @@ export default function Home() {
       {/* Hero Section */}
       <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12 flex-grow`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-          <motion.h1 
+          <motion.div 
+            className="flex flex-col items-center w-full max-w-3xl" // Invisible container with max width
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className={`text-2xl font-extrabold ${
-              isDarkMode ? "text-white" : "text-white"
-            } sm:text-3xl md:text-4xl lg:text-5xl`}
           >
-            Bergabunglah dengan Komunitas Inovator Kami
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="my-4 text-base md:text-lg text-white"
-          >
-            Daftar sekarang untuk menjadi bagian dari organisasi transformatif kami.
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-6 space-x-4"
-          >
-            <a
-              href="/formulir"
-              className={`inline-block ${
-                isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-white text-blue-700 hover:bg-blue-100"
-              } px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold transition duration-300 text-sm md:text-base`}
+            <h1 
+              className={`text-2xl font-extrabold ${
+                isDarkMode ? "text-white" : "text-white"
+              } sm:text-3xl md:text-4xl lg:text-5xl`}
             >
-              Daftar Sekarang
-            </a>
-            <button
-              onClick={scrollToInformasiPendaftaran}
-              className={`inline-block ${
-                isDarkMode ? "bg-blue-800 text-white hover:bg-blue-700" : "bg-blue-500 text-white hover:bg-blue-600"
-              } px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold transition duration-300 text-sm md:text-base`}
+              Bergabunglah dengan Komunitas Inovator Kami
+            </h1>
+            <p 
+              className="my-4 text-base md:text-lg text-white"
             >
-              Pelajari Lebih Lanjut
-            </button>
+              Daftar sekarang untuk menjadi bagian dari organisasi transformatif kami.
+            </p>
+            <div 
+              className="mt-6 flex flex-row justify-center space-x-4"
+            >
+              <a
+                href="/formulir"
+                className={`inline-block ${
+                  isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-white text-blue-700 hover:bg-blue-100"
+                } px-6 py-3 rounded-lg font-semibold transition duration-300 text-base`}
+              >
+                Daftar Sekarang
+              </a>
+              <button
+                onClick={scrollToInformasiPendaftaran}
+                className={`inline-block ${
+                  isDarkMode ? "bg-blue-800 text-white hover:bg-blue-700" : "bg-blue-500 text-white hover:bg-blue-600"
+                } px-6 py-3 rounded-lg font-semibold transition duration-300 text-base`}
+              >
+                Pelajari Lebih Lanjut
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -84,11 +80,12 @@ export default function Home() {
           } text-sm md:text-base max-w-3xl mx-auto`}>
             Kami adalah komunitas global yang berdedikasi untuk memajukan inovasi, kolaborasi, dan pertumbuhan. Misi kami adalah memberdayakan individu dan organisasi untuk menciptakan solusi berdampak bagi masa depan yang lebih baik.
           </p>
+          <div id="informasi-pendaftaran"></div>
         </motion.div>
       </section>
 
       {/* Registration Details Section */}
-      <section id="informasi-pendaftaran" className={`${isDarkMode ? "bg-gray-900" : "bg-gray-50"} py-8 md:py-10`}>
+      <section className={`${isDarkMode ? "bg-gray-900" : "bg-gray-50"} py-8 md:py-10`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: -20 }}

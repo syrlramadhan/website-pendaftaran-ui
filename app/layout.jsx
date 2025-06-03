@@ -17,14 +17,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full"> {/* Tambahkan class h-full */}
-      <body className={`${inter.className} flex flex-col min-h-screen`}> {/* Gunakan Flexbox */}
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <ThemeProvider>
           <Navbar />
-          <main className="flex-grow"> {/* Konten utama akan memenuhi sisa ruang */}
+          <main className="flex-grow">
             {children}
           </main>
-          <Footer /> {/* Footer akan selalu di bagian bawah */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

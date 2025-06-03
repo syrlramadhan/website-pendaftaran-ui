@@ -1,12 +1,12 @@
 "use client";
 
 import { useTheme } from "@/context/ThemeContext";
-import { FaBuilding, FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaBuilding, FaTwitter, FaFacebook, FaInstagram, FaSun, FaMoon } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const Navbar = () => {
-  const { isDarkMode } = useTheme();
+  const { isDarkMode, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Social Media Icons */}
+          {/* Social Media Icons and Dark Mode Toggle */}
           <div className="flex items-center space-x-4">
             <Link
               href="https://twitter.com"
@@ -119,6 +119,21 @@ const Navbar = () => {
               <span className="sr-only">Instagram</span>
               <FaInstagram className="h-6 w-6" />
             </Link>
+            <button
+              onClick={toggleTheme}
+              className={`rounded-full p-2 ${
+                isScrolled
+                  ? isDarkMode
+                    ? "text-gray-200 hover:bg-gray-700"
+                    : "text-gray-800 hover:bg-gray-200"
+                  : isDarkMode
+                  ? "text-gray-200 hover:bg-gray-700"
+                  : "text-white hover:bg-blue-600"
+              } focus:outline-none focus:ring-2 focus:ring-white`}
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {isDarkMode ? <FaSun className="h-6 w-6" /> : <FaMoon className="h-6 w-6" />}
+            </button>
           </div>
         </div>
       </div>

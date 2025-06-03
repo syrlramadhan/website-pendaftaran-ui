@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaUser, FaEnvelope, FaPhone, FaFileAlt } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaPhone, FaFileUpload, FaTimes } from "react-icons/fa";
+import { addPendaftar } from "@/service/pendaftar";
 
 const Formulir = () => {
   const { isDarkMode } = useTheme();
@@ -14,7 +15,7 @@ const Formulir = () => {
     name: "",
     email: "",
     phone: "",
-    project: "",
+    proofOfPayment: null,
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,9 +23,21 @@ const Formulir = () => {
 
   // Handle input changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: "" });
+    const { name, value, files } = e.target;
+    if (name === "proofOfPayment") {
+      const file = files[0] || null;
+      setFormData({ ...formData, [name]: file });
+      setErrors({ ...errors, [name]: "" });
+    } else {
+      setFormData({ ...formData, [name]: value });
+      setErrors({ ...errors, [name]: "" });
+    }
+  };
+
+  // Remove selected file
+  const handleRemoveFile = () => {
+    setFormData({ ...formData, proofOfPayment: null });
+    setErrors({ ...errors, proofOfPayment: "" });
   };
 
   // Validate form
@@ -41,12 +54,16 @@ const Formulir = () => {
     } else if (!/^\+?\d{10,15}$/.test(formData.phone.replace(/\s/g, ""))) {
       newErrors.phone = "Nomor telepon tidak valid";
     }
-    if (!formData.project.trim()) newErrors.project = "Deskripsi proyek wajib diisi";
+    if (!formData.proofOfPayment) {
+      newErrors.proofOfPayment = "Bukti transfer biaya pendaftaran wajib diunggah";
+    } else if (formData.proofOfPayment.size > 5 * 1024 * 1024) {
+      newErrors.proofOfPayment = "Ukuran file tidak boleh melebihi 5MB";
+    }
     return newErrors;
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -55,34 +72,46 @@ const Formulir = () => {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await addPendaftar(formData);
       setSubmitSuccess(true);
-      setFormData({ name: "", email: "", phone: "", project: "" });
-    }, 1000);
+      setFormData({ name: "", email: "", phone: "", proofOfPayment: null });
+    } catch (error) {
+      setErrors({ ...errors, submit: error.message });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Format file size for display
+  const formatFileSize = (bytes) => {
+    if (bytes < 1024) return bytes + " bytes";
+    else if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + " KB";
+    else return (bytes / (1024 * 1024)).toFixed(2) + " MB";
   };
 
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-gray-50"}`}>
       {/* Header Section */}
       <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12`}>
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.h1
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+          <motion.div 
+            className="w-full"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className={`text-2xl font-extrabold ${isDarkMode ? "text-white" : "text-white"} sm:text-3xl md:text-4xl`}
           >
-            Formulir Pendaftaran
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-4 text-base md:text-lg text-white"
-          >
-            Isi formulir di bawah ini untuk bergabung dengan Komunitas Inovasi kami dan mulai perjalanan Anda menuju inovasi dan kolaborasi.
-          </motion.p>
+            <h1 
+              className={`text-2xl font-extrabold ${isDarkMode ? "text-white" : "text-white"} sm:text-3xl md:text-4xl`}
+            >
+              Formulir Pendaftaran
+            </h1>
+            <p 
+              className="mt-4 text-base md:text-lg text-white"
+            >
+              Isi formulir di bawah ini untuk bergabung dengan Komunitas Inovasi kami dan mulai perjalanan Anda menuju inovasi dan kolaborasi.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -233,31 +262,69 @@ const Formulir = () => {
                       {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                     </div>
 
-                    {/* Project Description Field */}
+                    {/* Proof of Payment Upload Field */}
                     <div className="mb-6">
-                      <label htmlFor="project" className={`block text-sm font-medium ${isDarkMode ? "text-gray-200" : "text-gray-700"} mb-2`}>
-                        <FaFileAlt className="inline mr-2" /> Deskripsi Proyek atau Minat
+                      <label htmlFor="proofOfPayment" className={`block text-sm font-medium ${isDarkMode ? "text-gray-200" : "text-gray-700"} mb-2`}>
+                        <FaFileUpload className="inline mr-2" /> Upload Bukti Transfer Biaya Pendaftaran
                       </label>
-                      <textarea
-                        id="project"
-                        name="project"
-                        value={formData.project}
-                        onChange={handleChange}
-                        rows="4"
-                        className={`w-full px-4 py-2 rounded-lg border ${
-                          errors.project
-                            ? "border-red-500"
-                            : isDarkMode
-                            ? "border-gray-600 bg-gray-700 text-white"
-                            : "border-gray-300 bg-white text-gray-900"
-                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                        placeholder="Ceritakan tentang proyek atau minat Anda dalam inovasi (maks. 500 kata)"
-                      />
+                      <div className="flex items-center space-x-3">
+                        <label
+                          className={`inline-flex items-center px-4 py-2 rounded-lg cursor-pointer transition duration-300 ${
+                            isDarkMode
+                              ? "bg-blue-700 text-white hover:bg-blue-600 border-blue-700"
+                              : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
+                          } ${errors.proofOfPayment ? "border-2 border-red-500" : "border-2 border-transparent"}`}
+                        >
+                          <FaFileUpload className="mr-2" />
+                          Pilih File
+                          <input
+                            type="file"
+                            id="proofOfPayment"
+                            name="proofOfPayment"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            onChange={handleChange}
+                            className="hidden"
+                          />
+                        </label>
+                        <div className="flex-1 flex items-center space-x-2">
+                          <span
+                            className={`text-sm truncate ${
+                              formData.proofOfPayment
+                                ? isDarkMode
+                                  ? "text-gray-300"
+                                  : "text-gray-700"
+                                : isDarkMode
+                                ? "text-gray-400"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {formData.proofOfPayment
+                              ? `${formData.proofOfPayment.name} (${formatFileSize(formData.proofOfPayment.size)})`
+                              : "Belum ada file yang dipilih"}
+                          </span>
+                          {formData.proofOfPayment && (
+                            <button
+                              type="button"
+                              onClick={handleRemoveFile}
+                              className={`text-red-500 hover:text-red-600 transition duration-300`}
+                            >
+                              <FaTimes />
+                            </button>
+                          )}
+                        </div>
+                      </div>
                       <p className={`text-xs ${isDarkMode ? "text-gray-400" : "text-gray-500"} mt-1`}>
-                        Jelaskan ide atau minat Anda untuk membantu kami memahami kontribusi Anda di komunitas.
+                        Unggah bukti transfer biaya pendaftaran dalam format PDF, JPG, atau PNG (maks. 5MB).
                       </p>
-                      {errors.project && <p className="text-red-500 text-xs mt-1">{errors.project}</p>}
+                      {errors.proofOfPayment && <p className="text-red-500 text-xs mt-1">{errors.proofOfPayment}</p>}
                     </div>
+
+                    {/* Submit Error Message */}
+                    {errors.submit && (
+                      <div className="text-center mb-4">
+                        <p className="text-red-500 text-sm">{errors.submit}</p>
+                      </div>
+                    )}
 
                     {/* Submit Button */}
                     <div className="text-center">
@@ -266,7 +333,7 @@ const Formulir = () => {
                         disabled={isSubmitting}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`inline-block px-6 py-3 rounded-lg font-semibold transition duration-300 text-sm md:text-base ${
+                        className={`inline-block px-6 py-3 rounded-lg font-semibold transition duration-300 text-base ${
                           isSubmitting
                             ? "bg-gray-500 text-white cursor-not-allowed"
                             : isDarkMode
