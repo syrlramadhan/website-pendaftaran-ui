@@ -91,7 +91,7 @@ const Navbar = () => {
           </div>
 
           {/* Social Media Icons and Dark Mode Toggle (Hidden on Mobile, Popup on Click) */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2">
             <Link
               href="https://twitter.com"
               target="_blank"
@@ -107,7 +107,7 @@ const Navbar = () => {
               } focus:outline-none focus:ring-2 focus:ring-white`}
             >
               <span className="sr-only">Twitter</span>
-              <FaTwitter className="h-6 w-6" />
+              <FaTwitter className="h-5 w-5" />
             </Link>
             <Link
               href="https://facebook.com"
@@ -124,7 +124,7 @@ const Navbar = () => {
               } focus:outline-none focus:ring-2 focus:ring-white`}
             >
               <span className="sr-only">Facebook</span>
-              <FaFacebook className="h-6 w-6" />
+              <FaFacebook className="h-5 w-5" />
             </Link>
             <Link
               href="https://instagram.com"
@@ -141,7 +141,7 @@ const Navbar = () => {
               } focus:outline-none focus:ring-2 focus:ring-white`}
             >
               <span className="sr-only">Instagram</span>
-              <FaInstagram className="h-6 w-6" />
+              <FaInstagram className="h-5 w-5" />
             </Link>
             <button
               onClick={toggleTheme}
@@ -156,7 +156,7 @@ const Navbar = () => {
               } focus:outline-none focus:ring-2 focus:ring-white`}
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {isDarkMode ? <FaSun className="h-6 w-6" /> : <FaMoon className="h-6 w-6" />}
+              {isDarkMode ? <FaSun className="h-5 w-5" /> : <FaMoon className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
               className="text-white text-2xl hover:text-gray-300 focus:outline-none"
               onClick={toggleMobileMenu}
             >
-              <FaTwitter className="inline mr-2" /> Twitter
+              <FaTwitter className="inline mr-1" /> Twitter
             </Link>
             <Link
               href="https://facebook.com"
@@ -191,7 +191,7 @@ const Navbar = () => {
               className="text-white text-2xl hover:text-gray-300 focus:outline-none"
               onClick={toggleMobileMenu}
             >
-              <FaFacebook className="inline mr-2" /> Facebook
+              <FaFacebook className="inline mr-1" /> Facebook
             </Link>
             <Link
               href="https://instagram.com"
@@ -200,7 +200,7 @@ const Navbar = () => {
               className="text-white text-2xl hover:text-gray-300 focus:outline-none"
               onClick={toggleMobileMenu}
             >
-              <FaInstagram className="inline mr-2" /> Instagram
+              <FaInstagram className="inline mr-1" /> Instagram
             </Link>
             <button
               onClick={() => {
@@ -210,7 +210,7 @@ const Navbar = () => {
               className="text-white text-2xl hover:text-gray-300 focus:outline-none flex items-center"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {isDarkMode ? <FaSun className="inline mr-2" /> : <FaMoon className="inline mr-2" />}
+              {isDarkMode ? <FaSun className="inline mr-1" /> : <FaMoon className="inline mr-1" />}
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>

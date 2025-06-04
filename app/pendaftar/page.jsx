@@ -46,7 +46,7 @@ const Pendaftar = () => {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(20);
+  const [itemsPerPage] = useState(15);
 
   // Check token and fetch registrants
   useEffect(() => {
@@ -96,6 +96,10 @@ const Pendaftar = () => {
       setCurrentPage(pageNumber);
     }
   };
+
+  // Handle first and last page navigation
+  const goToFirstPage = () => setCurrentPage(1);
+  const goToLastPage = () => setCurrentPage(totalPages);
 
   // Function to export data to Excel
   const exportToExcel = async () => {
@@ -323,6 +327,20 @@ const Pendaftar = () => {
                     </div>
                     <div className='flex gap-1'>
                       <button
+                        onClick={goToFirstPage}
+                        disabled={currentPage === 1}
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                          currentPage === 1
+                            ? 'bg-gray-500 cursor-not-allowed text-white'
+                            : isDarkMode
+                            ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                        }`}
+                        aria-label='Halaman awal'
+                      >
+                        «
+                      </button>
+                      <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
                         className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
@@ -367,6 +385,20 @@ const Pendaftar = () => {
                         aria-label='Halaman berikutnya'
                       >
                         &gt;
+                      </button>
+                      <button
+                        onClick={goToLastPage}
+                        disabled={currentPage === totalPages}
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                          currentPage === totalPages
+                            ? 'bg-gray-500 cursor-not-allowed text-white'
+                            : isDarkMode
+                            ? 'bg-gray-700 hover:bg-gray-600 text-white'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                        }`}
+                        aria-label='Halaman akhir'
+                      >
+                        »
                       </button>
                     </div>
                   </div>
