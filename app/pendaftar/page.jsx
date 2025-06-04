@@ -181,7 +181,7 @@ const Pendaftar = () => {
             <p className='mt-4 text-base md:text-lg text-white'>
               Berikut adalah daftar individu yang telah mendaftar untuk bergabung dengan komunitas kami.
             </p>
-            <div className='mt-6 flex justify-center gap-4'>
+            <div className='mt-6 flex flex-col md:flex-row justify-center gap-4'>
               <button
                 onClick={exportToExcel}
                 disabled={loading || registrants.length === 0}
@@ -248,7 +248,7 @@ const Pendaftar = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className={`overflow-x-auto ${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-md`}
+              className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} p-6 rounded-lg shadow-md`}
             >
               <p className={`text-base md:text-lg ${isDarkMode ? 'text-gray-200' : 'text-blue-700'}`}>
                 Total Pendaftar: {getTotalRegistrants()}
@@ -259,72 +259,73 @@ const Pendaftar = () => {
                 </p>
               ) : (
                 <>
-                  <table className='w-full text-sm md:text-base mt-4'>
-                    <thead>
-                      <tr className={`${isDarkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'}`}>ID</th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'}`}>
-                          Nama Lengkap
-                        </th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'}`}>Email</th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'}`}>
-                          Nomor Telepon
-                        </th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'}`}>
-                          Dokumen
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {currentItems.map((registrant, index) => (
-                        <motion.tr
-                          key={registrant.id}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-                          className={`${isDarkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100'} border-t`}
-                        >
-                          <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                            {registrant.id}
-                          </td>
-                          <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                            {registrant['nama-lengkap']}
-                          </td>
-                          <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                            {registrant.email}
-                          </td>
-                          <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                            {registrant['no-telp']}
-                          </td>
-                          <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-                            {registrant['bukti-transfer'] ? (
-                              <button
-                                onClick={() => setSelectedImage(registrant['bukti-transfer'])}
-                                className={`focus:outline-none ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-800'}`}
-                                aria-label={`Lihat dokumen untuk ${registrant['nama-lengkap']}`}
-                              >
-                                <FaFile className='text-xl' />
-                              </button>
-                            ) : (
-                              'Tidak ada'
-                            )}
-                          </td>
-                        </motion.tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <div className="relative">
+                    <table className='w-full text-sm md:text-base mt-4 table-auto md:table-fixed overflow-x-auto block md:table'>
+                      <thead>
+                        <tr className={`${isDarkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
+                          <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'} min-w-[50px]`}>No</th>
+                          <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'} min-w-[150px]`}>
+                            Nama Lengkap
+                          </th>
+                          <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'} min-w-[200px]`}>Email</th>
+                          <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'} min-w-[150px]`}>
+                            Nomor Telepon
+                          </th>
+                          <th className={`py-3 px-4 text-left ${isDarkMode ? 'text-gray-200' : 'text-blue-700'} min-w-[100px]`}>
+                            Dokumen
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {currentItems.map((registrant, index) => (
+                          <motion.tr
+                            key={registrant.id}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                            className={`${isDarkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-100'} border-t`}
+                          >
+                            <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+                              {indexOfFirstItem + index + 1}
+                            </td>
+                            <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+                              {registrant['nama-lengkap']}
+                            </td>
+                            <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+                              {registrant.email}
+                            </td>
+                            <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+                              {registrant['no-telp']}
+                            </td>
+                            <td className={`py-3 px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
+                              {registrant['bukti-transfer'] ? (
+                                <button
+                                  onClick={() => setSelectedImage(registrant['bukti-transfer'])}
+                                  className={`focus:outline-none ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-800'}`}
+                                  aria-label={`Lihat dokumen untuk ${registrant['nama-lengkap']}`}
+                                >
+                                  <FaFile className='text-xl' />
+                                </button>
+                              ) : (
+                                'Tidak ada'
+                              )}
+                            </td>
+                          </motion.tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
 
                   {/* Pagination Controls */}
-                  <div className='flex justify-between items-center mt-6'>
-                    <div className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                      Menampilkan {indexOfFirstItem + 1} - {Math.min(indexOfLastItem, registrants.length)} dari{' '}
-                      {registrants.length} pendaftar
+                  <div className='flex justify-between items-center mt-4'>
+                    <div className={`text-xs md:text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                      {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, registrants.length)}/{registrants.length}
                     </div>
-                    <div className='flex gap-2'>
+                    <div className='flex gap-1'>
                       <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className={`px-4 py-2 rounded-lg font-semibold transition duration-300 ${
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
                           currentPage === 1
                             ? 'bg-gray-500 cursor-not-allowed text-white'
                             : isDarkMode
@@ -333,13 +334,13 @@ const Pendaftar = () => {
                         }`}
                         aria-label='Halaman sebelumnya'
                       >
-                        Sebelumnya
+                        &lt;
                       </button>
                       {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                         <button
                           key={page}
                           onClick={() => handlePageChange(page)}
-                          className={`px-4 py-2 rounded-lg font-semibold transition duration-300 ${
+                          className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
                             currentPage === page
                               ? isDarkMode
                                 ? 'bg-blue-500 text-white'
@@ -356,7 +357,7 @@ const Pendaftar = () => {
                       <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className={`px-4 py-2 rounded-lg font-semibold transition duration-300 ${
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
                           currentPage === totalPages
                             ? 'bg-gray-500 cursor-not-allowed text-white'
                             : isDarkMode
@@ -365,7 +366,7 @@ const Pendaftar = () => {
                         }`}
                         aria-label='Halaman berikutnya'
                       >
-                        Berikutnya
+                        &gt;
                       </button>
                     </div>
                   </div>

@@ -2,9 +2,47 @@
 
 import { useTheme } from "@/context/ThemeContext";
 import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function Home() {
   const { isDarkMode } = useTheme();
+
+  // State for Informasi Pendaftaran carousel
+  const [infoCurrentIndex, setInfoCurrentIndex] = useState(0);
+  const [infoTouchStart, setInfoTouchStart] = useState(null);
+  const infoItems = [
+    {
+      title: "Kelayakan",
+      description: "Terbuka untuk individu dan tim yang bersemangat tentang inovasi, berusia 18 tahun ke atas.",
+    },
+    {
+      title: "Proses",
+      description: "Pendaftaran online yang sederhana dengan konfirmasi instan dan detail tindak lanjut.",
+    },
+    {
+      title: "Batas Waktu",
+      description: "Daftar sebelum 30 Juni 2025 untuk mengamankan tempat Anda.",
+    },
+  ];
+
+  // State for Apa yang Anda Dapatkan carousel
+  const [benefitsCurrentIndex, setBenefitsCurrentIndex] = useState(0);
+  const [benefitsTouchStart, setBenefitsTouchStart] = useState(null);
+  const benefitsItems = [
+    {
+      title: "Jaringan",
+      description: "Terhubung dengan inovator dan pemimpin industri yang memiliki visi serupa.",
+    },
+    {
+      title: "Sumber Daya",
+      description: "Akses alat eksklusif, lokakarya, dan program mentorship.",
+    },
+    {
+      title: "Peluang",
+      description: "Buka potensi untuk kolaborasi dan pendanaan proyek.",
+    },
+  ];
 
   const scrollToInformasiPendaftaran = () => {
     const section = document.getElementById("informasi-pendaftaran");
@@ -13,13 +51,61 @@ export default function Home() {
     }
   };
 
+  // Handlers for Informasi Pendaftaran carousel
+  const handleInfoPrev = () => {
+    setInfoCurrentIndex((prev) => (prev === 0 ? infoItems.length - 1 : prev - 1));
+  };
+
+  const handleInfoNext = () => {
+    setInfoCurrentIndex((prev) => (prev === infoItems.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleInfoTouchStart = (e) => {
+    setInfoTouchStart(e.touches[0].clientX);
+  };
+
+  const handleInfoTouchEnd = (e) => {
+    if (!infoTouchStart) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = infoTouchStart - touchEnd;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) handleInfoNext();
+      else handleInfoPrev();
+    }
+    setInfoTouchStart(null);
+  };
+
+  // Handlers for Apa yang Anda Dapatkan carousel
+  const handleBenefitsPrev = () => {
+    setBenefitsCurrentIndex((prev) => (prev === 0 ? benefitsItems.length - 1 : prev - 1));
+  };
+
+  const handleBenefitsNext = () => {
+    setBenefitsCurrentIndex((prev) => (prev === benefitsItems.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleBenefitsTouchStart = (e) => {
+    setBenefitsTouchStart(e.touches[0].clientX);
+  };
+
+  const handleBenefitsTouchEnd = (e) => {
+    if (!benefitsTouchStart) return;
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = benefitsTouchStart - touchEnd;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) handleBenefitsNext();
+      else handleBenefitsPrev();
+    }
+    setBenefitsTouchStart(null);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12 flex-grow`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <motion.div 
-            className="flex flex-col items-center w-full max-w-3xl" // Invisible container with max width
+            className="flex flex-col items-center w-full max-w-3xl"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -38,7 +124,7 @@ export default function Home() {
               Daftar sekarang untuk menjadi bagian dari organisasi transformatif kami.
             </p>
             <div 
-              className="mt-6 flex flex-row justify-center space-x-4"
+              className="mt-6 flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4"
             >
               <a
                 href="/formulir"
@@ -99,63 +185,83 @@ export default function Home() {
             } mb-4 md:mb-6`}>
               Informasi Pendaftaran
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className={`${
-                  isDarkMode ? "bg-gray-700" : "bg-blue-50"
-                } p-4 md:p-6 rounded-lg shadow-md`}
+            <div className="relative">
+              {/* Carousel for mobile */}
+              <div
+                className="md:hidden relative flex overflow-hidden"
+                onTouchStart={handleInfoTouchStart}
+                onTouchEnd={handleInfoTouchEnd}
               >
-                <h3 className={`text-lg font-bold ${
-                  isDarkMode ? "text-white" : "text-blue-700"
-                } mb-2`}>
-                  Kelayakan
-                </h3>
-                <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
-                  Terbuka untuk individu dan tim yang bersemangat tentang inovasi, berusia 18 tahun ke atas.
-                </p>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className={`${
-                  isDarkMode ? "bg-gray-700" : "bg-blue-50"
-                } p-4 md:p-6 rounded-lg shadow-md`}
-              >
-                <h3 className={`${isDarkMode ? "text-white" : "text-blue-700"} text-lg font-bold mb-2`}>
-                  Proses
-                </h3>
-                <p className={`${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                } text-sm md:text-base`}>
-                  Pendaftaran online yang sederhana dengan konfirmasi instan dan detail tindak lanjut.
-                </p>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className={`${
-                  isDarkMode ? "bg-gray-700" : "bg-blue-50"
-                } p-4 md:p-6 rounded-lg shadow-md`}
-              >
-                <h3 className={`text-lg font-bold ${
-                  isDarkMode ? "text-white" : "text-blue-700"
-                } mb-2`}>
-                  Batas Waktu
-                </h3>
-                <p className={`${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                } text-sm md:text-base`}>
-                  Daftar sebelum [Batas Waktu Anda] untuk mengamankan tempat Anda.
-                </p>
-              </motion.div>
+                <motion.div
+                  className="flex transition-transform duration-300"
+                  style={{ transform: `translateX(-${infoCurrentIndex * 100}%)` }}
+                >
+                  {infoItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`min-w-full p-4 rounded-lg shadow-md ${
+                        isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                      }`}
+                    >
+                      <h3 className={`text-lg font-bold ${
+                        isDarkMode ? "text-white" : "text-blue-700"
+                      } mb-2`}>
+                        {item.title}
+                      </h3>
+                      <p className={`${
+                        isDarkMode ? "text-gray-300" : "text-gray-600"
+                      } text-sm md:text-base`}>
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </motion.div>
+                {/* Navigation Icons for Mobile - Overlaid */}
+                <button
+                  onClick={handleInfoPrev}
+                  className={`absolute left-2 top-1/2 transform -translate-y-1/2 text-2xl ${
+                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                  } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
+                  aria-label="Previous item"
+                >
+                  <FaChevronLeft />
+                </button>
+                <button
+                  onClick={handleInfoNext}
+                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl ${
+                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                  } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
+                  aria-label="Next item"
+                >
+                  <FaChevronRight />
+                </button>
+              </div>
+              {/* Grid for Desktop */}
+              <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                {infoItems.map((item, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                    className={`${
+                      isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                    } p-4 md:p-6 rounded-lg shadow-md`}
+                  >
+                    <h3 className={`text-lg font-bold ${
+                      isDarkMode ? "text-white" : "text-blue-700"
+                    } mb-2`}>
+                      {item.title}
+                    </h3>
+                    <p className={`${
+                      isDarkMode ? "text-gray-300" : "text-gray-600"
+                    } text-sm md:text-base`}>
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
@@ -176,67 +282,83 @@ export default function Home() {
             } mb-4 md:mb-6`}>
               Apa yang Anda Dapatkan
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className={`${
-                  isDarkMode ? "bg-gray-700" : "bg-blue-50"
-                } p-4 md:p-6 rounded-lg shadow-md`}
+            <div className="relative">
+              {/* Carousel for mobile */}
+              <div
+                className="md:hidden relative flex overflow-hidden"
+                onTouchStart={handleBenefitsTouchStart}
+                onTouchEnd={handleBenefitsTouchEnd}
               >
-                <h3 className={`text-lg font-bold ${
-                  isDarkMode ? "text-white" : "text-blue-700"
-                } mb-2`}>
-                  Jaringan
-                </h3>
-                <p className={`${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                } text-sm md:text-base`}>
-                  Terhubung dengan inovator dan pemimpin industri yang memiliki visi serupa.
-                </p>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className={`${
-                  isDarkMode ? "bg-gray-700" : "bg-blue-50"
-                } p-4 md:p-6 rounded-lg shadow-md`}
-              >
-                <h3 className={`text-lg font-bold ${
-                  isDarkMode ? "text-white" : "text-blue-700"
-                } mb-2`}>
-                  Sumber Daya
-                </h3>
-                <p className={`${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                } text-sm md:text-base`}>
-                  Akses alat eksklusif, lokakarya, dan program mentorship.
-                </p>
-              </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className={`${
-                  isDarkMode ? "bg-gray-700" : "bg-blue-50"
-                } p-4 md:p-6 rounded-lg shadow-md`}
-              >
-                <h3 className={`text-lg font-bold ${
-                  isDarkMode ? "text-white" : "text-blue-700"
-                } mb-2`}>
-                  Peluang
-                </h3>
-                <p className={`${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                } text-sm md:text-base`}>
-                  Buka potensi untuk kolaborasi dan pendanaan proyek.
-                </p>
-              </motion.div>
+                <motion.div
+                  className="flex transition-transform duration-300"
+                  style={{ transform: `translateX(-${benefitsCurrentIndex * 100}%)` }}
+                >
+                  {benefitsItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`min-w-full p-4 rounded-lg shadow-md ${
+                        isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                      }`}
+                    >
+                      <h3 className={`text-lg font-bold ${
+                        isDarkMode ? "text-white" : "text-blue-700"
+                      } mb-2`}>
+                        {item.title}
+                      </h3>
+                      <p className={`${
+                        isDarkMode ? "text-gray-300" : "text-gray-600"
+                      } text-sm md:text-base`}>
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </motion.div>
+                {/* Navigation Icons for Mobile - Overlaid */}
+                <button
+                  onClick={handleBenefitsPrev}
+                  className={`absolute left-2 top-1/2 transform -translate-y-1/2 text-2xl ${
+                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                  } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
+                  aria-label="Previous item"
+                >
+                  <FaChevronLeft />
+                </button>
+                <button
+                  onClick={handleBenefitsNext}
+                  className={`absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl ${
+                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                  } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
+                  aria-label="Next item"
+                >
+                  <FaChevronRight />
+                </button>
+              </div>
+              {/* Grid for Desktop */}
+              <div className="hidden md:grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                {benefitsItems.map((item, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                    className={`${
+                      isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                    } p-4 md:p-6 rounded-lg shadow-md`}
+                  >
+                    <h3 className={`text-lg font-bold ${
+                      isDarkMode ? "text-white" : "text-blue-700"
+                    } mb-2`}>
+                      {item.title}
+                    </h3>
+                    <p className={`${
+                      isDarkMode ? "text-gray-300" : "text-gray-600"
+                    } text-sm md:text-base`}>
+                      {item.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
