@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
@@ -9,8 +9,6 @@ import { addPendaftar } from "@/service/pendaftar";
 const Formulir = () => {
   const { isDarkMode } = useTheme();
   const [activeTab, setActiveTab] = useState("formulir");
-
-  // Form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -95,20 +93,18 @@ const Formulir = () => {
       {/* Header Section */}
       <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12`}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-          <motion.div 
+          <motion.div
             className="w-full"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h1 
+            <h1
               className={`text-2xl font-extrabold ${isDarkMode ? "text-white" : "text-white"} sm:text-3xl md:text-4xl`}
             >
               Formulir Pendaftaran
             </h1>
-            <p 
-              className="mt-4 text-base md:text-lg text-white"
-            >
+            <p className="mt-4 text-base md:text-lg text-white">
               Isi formulir di bawah ini untuk bergabung dengan Komunitas Inovasi kami dan mulai perjalanan Anda menuju inovasi dan kolaborasi.
             </p>
           </motion.div>
@@ -273,13 +269,30 @@ const Formulir = () => {
                             isDarkMode
                               ? "bg-blue-700 text-white hover:bg-blue-600 border-blue-700"
                               : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
-                          } ${errors.proofOfPayment ? "border-2 border-red-500" : "border-2 border-transparent"}`}
+                          } ${errors.proofOfPayment ? "border-2 border-red-500" : "border-2 border-transparent"} md:inline-flex hidden`}
                         >
                           <FaFileUpload className="mr-2" />
                           Pilih File
                           <input
                             type="file"
                             id="proofOfPayment"
+                            name="proofOfPayment"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            onChange={handleChange}
+                            className="hidden"
+                          />
+                        </label>
+                        <label
+                          className={`inline-flex items-center p-2 rounded-lg cursor-pointer transition duration-300 ${
+                            isDarkMode
+                              ? "bg-blue-700 text-white hover:bg-blue-600 border-blue-700"
+                              : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
+                          } ${errors.proofOfPayment ? "border-2 border-red-500" : "border-2 border-transparent"} md:hidden`}
+                        >
+                          <FaFileUpload />
+                          <input
+                            type="file"
+                            id="proofOfPaymentMobile"
                             name="proofOfPayment"
                             accept=".pdf,.jpg,.jpeg,.png"
                             onChange={handleChange}
