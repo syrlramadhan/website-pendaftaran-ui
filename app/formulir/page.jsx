@@ -91,7 +91,7 @@ const Formulir = () => {
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-gray-50"}`}>
       {/* Header Section */}
-      <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12`}>
+      <section className={`${isDarkMode ? "bg-gray-900" : "bg-red-600"} py-16 md:py-20 px-8 md:px-12`}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <motion.div
             className="w-full"
@@ -119,11 +119,11 @@ const Formulir = () => {
             className={`py-2 px-4 text-sm md:text-base font-semibold ${
               activeTab === "formulir"
                 ? isDarkMode
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "border-b-2 border-blue-700 text-blue-700"
+                  ? "border-b-2 border-gray-200 text-gray-200"
+                  : "border-b-2 border-red-600 text-red-600"
                 : isDarkMode
-                ? "text-gray-400 hover:text-blue-400"
-                : "text-gray-600 hover:text-blue-700"
+                ? "text-gray-400 hover:text-gray-200"
+                : "text-gray-600 hover:text-red-600"
             }`}
           >
             Formulir
@@ -133,11 +133,11 @@ const Formulir = () => {
             className={`py-2 px-4 text-sm md:text-base font-semibold ${
               activeTab === "benefit"
                 ? isDarkMode
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "border-b-2 border-blue-700 text-blue-700"
+                  ? "border-b-2 border-gray-200 text-gray-200"
+                  : "border-b-2 border-red-600 text-red-600"
                 : isDarkMode
-                ? "text-gray-400 hover:text-blue-400"
-                : "text-gray-600 hover:text-blue-700"
+                ? "text-gray-400 hover:text-gray-200"
+                : "text-gray-600 hover:text-red-600"
             }`}
           >
             Benefit
@@ -147,11 +147,11 @@ const Formulir = () => {
             className={`py-2 px-4 text-sm md:text-base font-semibold ${
               activeTab === "informasi"
                 ? isDarkMode
-                  ? "border-b-2 border-blue-500 text-blue-400"
-                  : "border-b-2 border-blue-700 text-blue-700"
+                  ? "border-b-2 border-gray-200 text-gray-200"
+                  : "border-b-2 border-red-600 text-red-600"
                 : isDarkMode
-                ? "text-gray-400 hover:text-blue-400"
-                : "text-gray-600 hover:text-blue-700"
+                ? "text-gray-400 hover:text-gray-200"
+                : "text-gray-600 hover:text-red-600"
             }`}
           >
             Informasi Pendaftaran
@@ -176,7 +176,7 @@ const Formulir = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    className={`p-6 rounded-lg text-center ${isDarkMode ? "bg-gray-700 text-white" : "bg-blue-50 text-blue-700"}`}
+                    className={`p-6 rounded-lg text-center ${isDarkMode ? "bg-gray-700 text-white" : "bg-red-50 text-red-600"}`}
                   >
                     <h2 className="text-xl font-bold mb-2">Pendaftaran Berhasil!</h2>
                     <p className="text-sm">Terima kasih telah mendaftar. Kami akan menghubungi Anda segera dengan detail lebih lanjut.</p>
@@ -206,7 +206,7 @@ const Formulir = () => {
                             : isDarkMode
                             ? "border-gray-600 bg-gray-700 text-white"
                             : "border-gray-300 bg-white text-gray-900"
-                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        } focus:outline-none focus:ring-2 focus:ring-red-600`}
                         placeholder="Masukkan nama lengkap Anda"
                       />
                       {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
@@ -229,7 +229,7 @@ const Formulir = () => {
                             : isDarkMode
                             ? "border-gray-600 bg-gray-700 text-white"
                             : "border-gray-300 bg-white text-gray-900"
-                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        } focus:outline-none focus:ring-2 focus:ring-red-600`}
                         placeholder="Masukkan email Anda"
                       />
                       {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
@@ -252,7 +252,7 @@ const Formulir = () => {
                             : isDarkMode
                             ? "border-gray-600 bg-gray-700 text-white"
                             : "border-gray-300 bg-white text-gray-900"
-                        } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        } focus:outline-none focus:ring-2 focus:ring-red-600`}
                         placeholder="Masukkan nomor telepon Anda (contoh: +6281234567890)"
                       />
                       {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -267,8 +267,8 @@ const Formulir = () => {
                         <label
                           className={`inline-flex items-center px-4 py-2 rounded-lg cursor-pointer transition duration-300 ${
                             isDarkMode
-                              ? "bg-blue-700 text-white hover:bg-blue-600 border-blue-700"
-                              : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
+                              ? "bg-gray-700 text-white hover:bg-gray-600 border-gray-700"
+                              : "bg-red-600 text-white hover:bg-red-700 border-red-600"
                           } ${errors.proofOfPayment ? "border-2 border-red-500" : "border-2 border-transparent"} md:inline-flex hidden`}
                         >
                           <FaFileUpload className="mr-2" />
@@ -285,8 +285,8 @@ const Formulir = () => {
                         <label
                           className={`inline-flex items-center p-2 rounded-lg cursor-pointer transition duration-300 ${
                             isDarkMode
-                              ? "bg-blue-700 text-white hover:bg-blue-600 border-blue-700"
-                              : "bg-blue-500 text-white hover:bg-blue-600 border-blue-500"
+                              ? "bg-gray-700 text-white hover:bg-gray-600 border-gray-700"
+                              : "bg-red-600 text-white hover:bg-red-700 border-red-600"
                           } ${errors.proofOfPayment ? "border-2 border-red-500" : "border-2 border-transparent"} md:hidden`}
                         >
                           <FaFileUpload />
@@ -350,8 +350,8 @@ const Formulir = () => {
                           isSubmitting
                             ? "bg-gray-500 text-white cursor-not-allowed"
                             : isDarkMode
-                            ? "bg-blue-800 text-white hover:bg-blue-700"
-                            : "bg-blue-500 text-white hover:bg-blue-600"
+                            ? "bg-gray-700 text-white hover:bg-gray-600"
+                            : "bg-red-600 text-white hover:bg-red-700"
                         }`}
                       >
                         {isSubmitting ? "Mengirim..." : "Daftar Sekarang"}
@@ -375,7 +375,7 @@ const Formulir = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className={`text-xl font-bold text-center ${isDarkMode ? "text-white" : "text-blue-700"} mb-4 md:mb-6`}
+                  className={`text-xl font-bold text-center ${isDarkMode ? "text-white" : "text-red-600"} mb-4 md:mb-6`}
                 >
                   Apa yang Anda Dapatkan
                 </motion.h2>
@@ -384,9 +384,9 @@ const Formulir = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"} p-4 md:p-6 rounded-lg shadow-md`}
+                    className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"} p-4 md:p-6 rounded-lg shadow-md`}
                   >
-                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-blue-700"} mb-2`}>Jaringan</h3>
+                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-2`}>Jaringan</h3>
                     <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
                       Terhubung dengan inovator dan pemimpin industri yang memiliki visi serupa.
                     </p>
@@ -395,9 +395,9 @@ const Formulir = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"} p-4 md:p-6 rounded-lg shadow-md`}
+                    className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"} p-4 md:p-6 rounded-lg shadow-md`}
                   >
-                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-blue-700"} mb-2`}>Sumber Daya</h3>
+                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-2`}>Sumber Daya</h3>
                     <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
                       Akses alat eksklusif, lokakarya, dan program mentorship.
                     </p>
@@ -406,9 +406,9 @@ const Formulir = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"} p-4 md:p-6 rounded-lg shadow-md`}
+                    className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"} p-4 md:p-6 rounded-lg shadow-md`}
                   >
-                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-blue-700"} mb-2`}>Peluang</h3>
+                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-2`}>Peluang</h3>
                     <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
                       Buka potensi untuk kolaborasi dan pendanaan proyek.
                     </p>
@@ -430,7 +430,7 @@ const Formulir = () => {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className={`text-xl font-bold text-center ${isDarkMode ? "text-white" : "text-blue-700"} mb-4 md:mb-6`}
+                  className={`text-xl font-bold text-center ${isDarkMode ? "text-white" : "text-red-600"} mb-4 md:mb-6`}
                 >
                   Informasi Pendaftaran
                 </motion.h2>
@@ -439,9 +439,9 @@ const Formulir = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"} p-4 md:p-6 rounded-lg shadow-md`}
+                    className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"} p-4 md:p-6 rounded-lg shadow-md`}
                   >
-                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-blue-700"} mb-2`}>Kelayakan</h3>
+                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-2`}>Kelayakan</h3>
                     <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
                       Terbuka untuk individu dan tim yang bersemangat tentang inovasi, berusia 18 tahun ke atas.
                     </p>
@@ -450,9 +450,9 @@ const Formulir = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"} p-4 md:p-6 rounded-lg shadow-md`}
+                    className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"} p-4 md:p-6 rounded-lg shadow-md`}
                   >
-                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-blue-700"} mb-2`}>Proses</h3>
+                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-2`}>Proses</h3>
                     <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
                       Pendaftaran online yang sederhana dengan konfirmasi instan dan detail tindak lanjut.
                     </p>
@@ -461,9 +461,9 @@ const Formulir = () => {
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"} p-4 md:p-6 rounded-lg shadow-md`}
+                    className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"} p-4 md:p-6 rounded-lg shadow-md`}
                   >
-                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-blue-700"} mb-2`}>Batas Waktu</h3>
+                    <h3 className={`text-lg font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-2`}>Batas Waktu</h3>
                     <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} text-sm md:text-base`}>
                       Daftar sebelum 30 Juni 2025 untuk mengamankan tempat Anda.
                     </p>

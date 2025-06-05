@@ -71,7 +71,7 @@ const Login = () => {
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* Header Section */}
-      <section className={`${isDarkMode ? 'bg-gray-900' : 'bg-blue-700'} py-10 md:py-20 px-8 md:px-12`}>
+      <section className={`${isDarkMode ? 'bg-gray-900' : 'bg-red-600'} py-10 md:py-20 px-8 md:px-12`}>
         <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <motion.div
             className="w-full"
@@ -121,7 +121,7 @@ const Login = () => {
                     : isDarkMode
                     ? 'border-gray-600 bg-gray-700 text-white'
                     : 'border-gray-300 bg-white text-gray-900'
-                } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                } focus:outline-none focus:ring-2 focus:ring-red-600`}
                 placeholder="Masukkan nama pengguna Anda"
               />
               {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
@@ -147,7 +147,7 @@ const Login = () => {
                     : isDarkMode
                     ? 'border-gray-600 bg-gray-700 text-white'
                     : 'border-gray-300 bg-white text-gray-900'
-                } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                } focus:outline-none focus:ring-2 focus:ring-red-600`}
                 placeholder="Masukkan kata sandi Anda"
               />
               {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
@@ -171,8 +171,8 @@ const Login = () => {
                   isSubmitting
                     ? 'bg-gray-500 text-white cursor-not-allowed'
                     : isDarkMode
-                    ? 'bg-blue-800 text-white hover:bg-blue-700'
-                    : 'bg-blue-500 text-white hover:bg-blue-600'
+                    ? 'bg-gray-700 text-white hover:bg-gray-600'
+                    : 'bg-red-600 text-white hover:bg-red-700'
                 }`}
               >
                 <FaSignInAlt className="inline mr-2" />

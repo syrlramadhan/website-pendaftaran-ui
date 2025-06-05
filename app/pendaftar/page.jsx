@@ -110,7 +110,7 @@ const Pendaftar = () => {
       "Nama Lengkap": registrant["nama-lengkap"],
       Email: registrant.email,
       "Nomor Telepon": registrant["no-telp"],
-      Dokumen: registrant["bukti-transfer"] && registrant["bukti-transfer"] !== "no data" ? registrant["bukti-transfer"].split("/").pop() : "Tidak ada",
+      "Nama File Dokumen": registrant["bukti-transfer"] && registrant["bukti-transfer"] !== "no data" ? registrant["bukti-transfer"].split("/").pop() : "Tidak ada",
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(dataToExport);
@@ -171,7 +171,7 @@ const Pendaftar = () => {
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode ? "bg-gray-900" : "bg-gray-50"}`}>
       {/* Header Section */}
-      <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12`}>
+      <section className={`${isDarkMode ? "bg-gray-900" : "bg-red-600"} py-16 md:py-20 px-8 md:px-12`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <motion.div
             className="w-full max-w-3xl"
@@ -191,12 +191,13 @@ const Pendaftar = () => {
               <button
                 onClick={exportToExcel}
                 disabled={loading || registrants.length === 0}
-                className={`inline-flex items-center px-6 py-3 rounded-lg font-semibold transition duration-300 text-white text-base ${loading || registrants.length === 0
+                className={`inline-flex items-center px-6 py-3 rounded-lg font-semibold transition duration-300 text-white text-base ${
+                  loading || registrants.length === 0
                     ? "bg-gray-500 cursor-not-allowed"
                     : isDarkMode
-                      ? "bg-gray-700 hover:bg-gray-600"
-                      : "bg-blue-800 hover:bg-blue-900"
-                  }`}
+                    ? "bg-gray-700 hover:bg-gray-600"
+                    : "bg-red-700 hover:bg-red-800"
+                }`}
                 aria-label="Ekspor data ke Excel"
               >
                 <FaFileExcel className="mr-2" />
@@ -205,12 +206,13 @@ const Pendaftar = () => {
               <button
                 onClick={downloadAsZip}
                 disabled={loading || registrants.length === 0}
-                className={`inline-flex items-center px-6 py-3 rounded-lg font-semibold transition duration-300 text-white text-base ${loading || registrants.length === 0
+                className={`inline-flex items-center px-6 py-3 rounded-lg font-semibold transition duration-300 text-white text-base ${
+                  loading || registrants.length === 0
                     ? "bg-gray-500 cursor-not-allowed"
                     : isDarkMode
-                      ? "bg-gray-700 hover:bg-gray-600"
-                      : "bg-blue-800 hover:bg-blue-900"
-                  }`}
+                    ? "bg-gray-700 hover:bg-gray-600"
+                    : "bg-red-700 hover:bg-red-800"
+                }`}
                 aria-label="Unduh dokumen sebagai ZIP"
               >
                 <FaDownload className="mr-2" />
@@ -222,7 +224,7 @@ const Pendaftar = () => {
       </section>
 
       {/* Table Section */}
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Loading State */}
           {loading && (
@@ -254,7 +256,7 @@ const Pendaftar = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className={`overflow-x-auto ${isDarkMode ? "bg-gray-800" : "bg-white"} p-6 rounded-lg shadow-md`}
             >
-              <p className={`mt-4 text-base md:text-lg ${isDarkMode ? "text-gray-200" : "text-blue-700"}`}>
+              <p className={`text-base md:text-lg ${isDarkMode ? "text-gray-200" : "text-red-600"}`}>
                 Total Pendaftar: {getTotalRegistrants()}
               </p>
               {registrants.length === 0 ? (
@@ -265,12 +267,12 @@ const Pendaftar = () => {
                 <>
                   <table className="w-full text-sm md:text-base mt-4">
                     <thead>
-                      <tr className={`${isDarkMode ? "bg-gray-700" : "bg-blue-50"}`}>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-blue-700"}`}>No</th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-blue-700"}`}>Nama Lengkap</th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-blue-700"}`}>Email</th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-blue-700"}`}>Nomor Telepon</th>
-                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-blue-700"}`}>Dokumen</th>
+                      <tr className={`${isDarkMode ? "bg-gray-700" : "bg-red-50"}`}>
+                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-red-600"}`}>No</th>
+                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-red-600"}`}>Nama Lengkap</th>
+                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-red-600"}`}>Email</th>
+                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-red-600"}`}>Nomor Telepon</th>
+                        <th className={`py-3 px-4 text-left ${isDarkMode ? "text-gray-200" : "text-red-600"}`}>Dokumen</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -298,7 +300,7 @@ const Pendaftar = () => {
                             {registrant["bukti-transfer"] && registrant["bukti-transfer"] !== "no data" ? (
                               <button
                                 onClick={() => setSelectedImage(registrant["bukti-transfer"])}
-                                className={`focus:outline-none ${isDarkMode ? "text-blue-400 hover:text-blue-300" : "text-blue-600 hover:text-blue-800"}`}
+                                className={`focus:outline-none ${isDarkMode ? "text-gray-200 hover:text-gray-400" : "text-red-600 hover:text-red-800"}`}
                                 aria-label={`Lihat dokumen untuk ${registrant["nama-lengkap"]}`}
                               >
                                 <FaFile className="text-xl" />
@@ -321,12 +323,13 @@ const Pendaftar = () => {
                       <button
                         onClick={goToFirstPage}
                         disabled={currentPage === 1}
-                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${currentPage === 1
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                          currentPage === 1
                             ? "bg-gray-500 cursor-not-allowed text-white"
                             : isDarkMode
-                              ? "bg-gray-700 hover:bg-gray-600 text-white"
-                              : "bg-blue-600 hover:bg-blue-700 text-white"
-                          }`}
+                            ? "bg-gray-700 hover:bg-gray-600 text-white"
+                            : "bg-red-600 hover:bg-red-700 text-white"
+                        }`}
                         aria-label="Halaman awal"
                       >
                         «
@@ -334,12 +337,13 @@ const Pendaftar = () => {
                       <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${currentPage === 1
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                          currentPage === 1
                             ? "bg-gray-500 cursor-not-allowed text-white"
                             : isDarkMode
-                              ? "bg-gray-700 hover:bg-gray-600 text-white"
-                              : "bg-blue-600 hover:bg-blue-700 text-white"
-                          }`}
+                            ? "bg-gray-700 hover:bg-gray-600 text-white"
+                            : "bg-red-600 hover:bg-red-700 text-white"
+                        }`}
                         aria-label="Halaman sebelumnya"
                       >
                         &lt;
@@ -348,14 +352,15 @@ const Pendaftar = () => {
                         <button
                           key={page}
                           onClick={() => handlePageChange(page)}
-                          className={`px-2 py-1 rounded-md text-sm transition duration-300 ${currentPage === page
+                          className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                            currentPage === page
                               ? isDarkMode
-                                ? "bg-blue-500 text-white"
-                                : "bg-blue-600 text-white"
+                                ? "bg-gray-200 text-gray-800"
+                                : "bg-red-600 text-white"
                               : isDarkMode
                                 ? "bg-gray-700 hover:bg-gray-600 text-white"
-                                : "bg-blue-100 hover:bg-blue-200 text-blue-700"
-                            }`}
+                                : "bg-red-100 hover:bg-red-200 text-red-700"
+                          }`}
                           aria-label={`Pindah ke halaman ${page}`}
                         >
                           {page}
@@ -364,12 +369,13 @@ const Pendaftar = () => {
                       <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${currentPage === totalPages
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                          currentPage === totalPages
                             ? "bg-gray-500 cursor-not-allowed text-white"
                             : isDarkMode
-                              ? "bg-gray-700 hover:bg-gray-600 text-white"
-                              : "bg-blue-600 hover:bg-blue-700 text-white"
-                          }`}
+                            ? "bg-gray-700 hover:bg-gray-600 text-white"
+                            : "bg-red-600 hover:bg-red-700 text-white"
+                        }`}
                         aria-label="Halaman berikutnya"
                       >
                         &gt;
@@ -377,12 +383,13 @@ const Pendaftar = () => {
                       <button
                         onClick={goToLastPage}
                         disabled={currentPage === totalPages}
-                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${currentPage === totalPages
+                        className={`px-2 py-1 rounded-md text-sm transition duration-300 ${
+                          currentPage === totalPages
                             ? "bg-gray-500 cursor-not-allowed text-white"
                             : isDarkMode
-                              ? "bg-gray-700 hover:bg-gray-600 text-white"
-                              : "bg-blue-600 hover:bg-blue-700 text-white"
-                          }`}
+                            ? "bg-gray-700 hover:bg-gray-600 text-white"
+                            : "bg-red-600 hover:bg-red-700 text-white"
+                        }`}
                         aria-label="Halaman akhir"
                       >
                         »

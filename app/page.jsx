@@ -102,7 +102,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className={`${isDarkMode ? "bg-gray-900" : "bg-blue-700"} py-16 md:py-20 px-8 md:px-12 flex-grow`}>
+      <section className={`${isDarkMode ? "bg-gray-900" : "bg-red-600"} py-16 md:py-20 px-8 md:px-12 flex-grow`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <motion.div 
             className="flex flex-col items-center w-full max-w-3xl"
@@ -129,7 +129,7 @@ export default function Home() {
               <a
                 href="/formulir"
                 className={`inline-block ${
-                  isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-white text-blue-700 hover:bg-blue-100"
+                  isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-white text-red-600 hover:bg-red-100"
                 } px-6 py-3 rounded-lg font-semibold transition duration-300 text-base`}
               >
                 Daftar Sekarang
@@ -137,7 +137,7 @@ export default function Home() {
               <button
                 onClick={scrollToInformasiPendaftaran}
                 className={`inline-block ${
-                  isDarkMode ? "bg-blue-800 text-white hover:bg-blue-700" : "bg-blue-500 text-white hover:bg-blue-600"
+                  isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-red-700 text-white hover:bg-red-800"
                 } px-6 py-3 rounded-lg font-semibold transition duration-300 text-base`}
               >
                 Pelajari Lebih Lanjut
@@ -157,7 +157,7 @@ export default function Home() {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <h2 className={`text-xl font-bold ${
-            isDarkMode ? "text-white" : "text-blue-700"
+            isDarkMode ? "text-white" : "text-red-600"
           } mb-4 md:mb-6`}>
             Tentang Organisasi Kami
           </h2>
@@ -181,7 +181,7 @@ export default function Home() {
             className="text-center"
           >
             <h2 className={`text-xl font-bold ${
-              isDarkMode ? "text-white" : "text-blue-700"
+              isDarkMode ? "text-white" : "text-red-600"
             } mb-4 md:mb-6`}>
               Informasi Pendaftaran
             </h2>
@@ -200,11 +200,11 @@ export default function Home() {
                     <div
                       key={index}
                       className={`min-w-full p-4 rounded-lg shadow-md ${
-                        isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                        isDarkMode ? "bg-gray-700" : "bg-red-50"
                       }`}
                     >
                       <h3 className={`text-lg font-bold ${
-                        isDarkMode ? "text-white" : "text-blue-700"
+                        isDarkMode ? "text-white" : "text-red-600"
                       } mb-2`}>
                         {item.title}
                       </h3>
@@ -220,7 +220,7 @@ export default function Home() {
                 <button
                   onClick={handleInfoPrev}
                   className={`absolute left-2 top-1/2 transform -translate-y-1/2 text-2xl ${
-                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                    isDarkMode ? "text-gray-300" : "text-red-600"
                   } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
                   aria-label="Previous item"
                 >
@@ -229,7 +229,7 @@ export default function Home() {
                 <button
                   onClick={handleInfoNext}
                   className={`absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl ${
-                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                    isDarkMode ? "text-gray-300" : "text-red-600"
                   } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
                   aria-label="Next item"
                 >
@@ -246,11 +246,11 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                     className={`${
-                      isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                      isDarkMode ? "bg-gray-700" : "bg-red-50"
                     } p-4 md:p-6 rounded-lg shadow-md`}
                   >
                     <h3 className={`text-lg font-bold ${
-                      isDarkMode ? "text-white" : "text-blue-700"
+                      isDarkMode ? "text-white" : "text-red-600"
                     } mb-2`}>
                       {item.title}
                     </h3>
@@ -277,9 +277,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-center"
           >
-            <h2 className={`text-xl font-bold ${
-              isDarkMode ? "text-white" : "text-blue-700"
-            } mb-4 md:mb-6`}>
+            <h2 className={`text-xl font-bold ${isDarkMode ? "text-white" : "text-red-600"} mb-4 md:mb-6`}>
               Apa yang Anda Dapatkan
             </h2>
             <div className="relative">
@@ -297,11 +295,11 @@ export default function Home() {
                     <div
                       key={index}
                       className={`min-w-full p-4 rounded-lg shadow-md ${
-                        isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                        isDarkMode ? "bg-gray-700" : "bg-red-50"
                       }`}
                     >
                       <h3 className={`text-lg font-bold ${
-                        isDarkMode ? "text-white" : "text-blue-700"
+                        isDarkMode ? "text-white" : "text-red-600"
                       } mb-2`}>
                         {item.title}
                       </h3>
@@ -317,7 +315,7 @@ export default function Home() {
                 <button
                   onClick={handleBenefitsPrev}
                   className={`absolute left-2 top-1/2 transform -translate-y-1/2 text-2xl ${
-                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                    isDarkMode ? "text-gray-300" : "text-red-600"
                   } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
                   aria-label="Previous item"
                 >
@@ -326,7 +324,7 @@ export default function Home() {
                 <button
                   onClick={handleBenefitsNext}
                   className={`absolute right-2 top-1/2 transform -translate-y-1/2 text-2xl ${
-                    isDarkMode ? "text-gray-300" : "text-blue-700"
+                    isDarkMode ? "text-gray-300" : "text-red-600"
                   } bg-black bg-opacity-25 rounded-full p-2 focus:outline-none hover:bg-opacity-70 transition-opacity duration-200`}
                   aria-label="Next item"
                 >
@@ -343,11 +341,11 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                     className={`${
-                      isDarkMode ? "bg-gray-700" : "bg-blue-50"
+                      isDarkMode ? "bg-gray-700" : "bg-red-50"
                     } p-4 md:p-6 rounded-lg shadow-md`}
                   >
                     <h3 className={`text-lg font-bold ${
-                      isDarkMode ? "text-white" : "text-blue-700"
+                      isDarkMode ? "text-white" : "text-red-600"
                     } mb-2`}>
                       {item.title}
                     </h3>
@@ -365,7 +363,7 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className={`${isDarkMode ? "bg-gray-800" : "bg-blue-700"} py-6 md:py-8`}>
+      <section className={`${isDarkMode ? "bg-gray-800" : "bg-red-600"} py-6 md:py-8`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <motion.div 
@@ -390,7 +388,7 @@ export default function Home() {
               initial={{ opacity: 1 }}
               whileInView={{ opacity: 1, y: 0 }}
               className={`inline-block ${
-                isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-white text-blue-700 hover:bg-blue-100"
+                isDarkMode ? "bg-gray-800 text-white hover:bg-gray-700" : "bg-white text-red-600 hover:bg-red-100"
               } px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold transition duration-300 text-sm md:text-base`}
               href="/formulir"
             >

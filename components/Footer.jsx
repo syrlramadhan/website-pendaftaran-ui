@@ -8,7 +8,7 @@ const Footer = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <footer className={`${isDarkMode ? "bg-gray-800" : "bg-blue-700"} text-white py-6 md:py-8`}>
+    <footer className={`${isDarkMode ? "bg-gray-800" : "bg-red-600"} ${isDarkMode ? "text-gray-200" : "text-white"} py-6 md:py-8`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Grid untuk kolom informasi */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -49,16 +49,16 @@ const Footer = () => {
               className="space-y-2"
             >
               <li><a href="/register" className={`text-xs hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>Daftar Sekarang</a></li>
               <li><a href="/learn-more" className={`text-xs hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>Pelajari Lebih Lanjut</a></li>
               <li><a href="/contact" className={`text-xs hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>Kontak</a></li>
               <li><a href="/terms" className={`text-xs hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>Syarat dan Ketentuan</a></li>
             </motion.ul>
           </div>
@@ -80,15 +80,15 @@ const Footer = () => {
               className="space-y-2"
             >
               <li className="flex items-center space-x-2">
-                <FaEnvelope className="text-white" />
+                <FaEnvelope className={`${isDarkMode ? "text-gray-200" : "text-white"}`} />
                 <span className="text-xs">info@inovasi.org</span>
               </li>
               <li className="flex items-center space-x-2">
-                <FaPhoneAlt className="text-white" />
+                <FaPhoneAlt className={`${isDarkMode ? "text-gray-200" : "text-white"}`} />
                 <span className="text-xs">+62 123 4567 890</span>
               </li>
               <li className="flex items-center space-x-2">
-                <FaMapMarkerAlt className="text-white" />
+                <FaMapMarkerAlt className={`${isDarkMode ? "text-gray-200" : "text-white"}`} />
                 <span className="text-xs">Jl. Inovasi No. 123, Jakarta</span>
               </li>
             </motion.ul>
@@ -111,19 +111,19 @@ const Footer = () => {
               className="flex space-x-4"
             >
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className={`hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>
                 <span className="sr-only">Twitter</span>
                 <FaTwitter className="text-lg" />
               </a>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={`hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>
                 <span className="sr-only">Facebook</span>
                 <FaFacebook className="text-lg" />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={`hover:${
-                isDarkMode ? "text-blue-400" : "text-blue-300"
+                isDarkMode ? "text-gray-400" : "text-red-200"
               }`}>
                 <span className="sr-only">Instagram</span>
                 <FaInstagram className="text-lg" />
@@ -134,12 +134,12 @@ const Footer = () => {
 
         {/* Garis Pembatas */}
         <div className={`border-t ${
-          isDarkMode ? "border-gray-700" : "border-blue-600"
+          isDarkMode ? "border-gray-700" : "border-white"
         } my-6`}></div>
 
         {/* Hak Cipta */}
         <div className={`text-center text-xs ${
-          isDarkMode ? "text-gray-400" : "text-blue-200"
+          isDarkMode ? "text-gray-400" : "text-red-200"
         }`}>
           © 2025 Komunitas Inovasi. Hak cipta dilindungi.
         </div>
